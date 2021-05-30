@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useStaticQuery, graphql} from 'gatsby'
-import  Img from 'gatsby-image'
-
-
+import { useStaticQuery, graphql } from 'gatsby'
+import Img from 'gatsby-image'
 
 const Homepage = () => {
+
     const data = useStaticQuery(graphql`
+    
     query TripsQuery {
         allTripsJson {
           edges {
@@ -28,19 +28,24 @@ const Homepage = () => {
       }
     `)
 
-    function getTrips(data){
-        const tripsArray= []
+    function getTrips(data) {
+
+        const tripsArray = []
 
         // console.log("data.allTripsJson.edges", data.allTripsJson.edges);
 
-        data.allTripsJson.edges.forEach ((item, index)=>{
-          
+        data.allTripsJson.edges.forEach((item, index) => {
+
             tripsArray.push(
 
-                <div key = {index}>
-                    <Img src={item.node.img.childImageSharp.fixed.src}
-                    alt = {item.node.alt}
-                    fluid={item.node.img.childImageSharp.fixed} 
+                <div key={index}>
+
+                    <Img src={item.node.img.childImageSharp.fluid.src}
+
+                        alt={item.node.alt}
+
+                        fluid={item.node.img.childImageSharp.fluid}
+
                     // fixed={item.node.img.childImageSharp.fixed} 
                     />
                     {/* <ProductInfo>
@@ -62,10 +67,10 @@ const Homepage = () => {
     return (
         <ProductsContainer>
             <ProductsHeading></ProductsHeading>
-            
-            
-                <ProductWrapper>{getTrips(data)}</ProductWrapper>
-           
+
+
+            <ProductWrapper>{getTrips(data)}</ProductWrapper>
+
         </ProductsContainer>
     )
 }
